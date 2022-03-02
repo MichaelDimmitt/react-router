@@ -785,11 +785,13 @@ export function createRoutesFromChildren(
       }] is not a <Route> component. All component children of <Routes> must be a <Route> or <React.Fragment>`
     );
 
+    const { caseSensitive, element, index, path, ...rest } = element.props
     let route: RouteObject = {
-      caseSensitive: element.props.caseSensitive,
-      element: element.props.element,
-      index: element.props.index,
-      path: element.props.path,
+      caseSensitive,
+      element,
+      index,
+      path,
+      ...rest,
     };
 
     if (element.props.children) {
@@ -813,7 +815,7 @@ export type Params<Key extends string = string> = {
  * A route object represents a logical route, with (optionally) its child
  * routes organized in a tree-like structure.
  */
-export interface RouteObject {
+export interface RouteObject extends any {
   caseSensitive?: boolean;
   children?: RouteObject[];
   element?: React.ReactNode;
